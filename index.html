@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html ng-app="angular-google-maps-example">
+
+<head>
+  <meta charset="UTF-8">
+  <title>angular-google-maps example page</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="css/bootstrap.css"> 
+
+  <style>
+    .name{
+      color:rgb(106,182,200);
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .places{float:left;}
+
+    .places li{
+      list-style:none;
+    }
+
+    #showHide{display:block; margin:2em 0;}
+  </style>
+</head>
+<body ng-controller="ExampleController">
+  <div class="places" >
+  <select id="dropdown" ng-model="orderProp" >
+    <option ng-repeat="cats in categories" value="{{cats}}">{{cats}}</option>
+  </select>
+  <button id="showHide" ng-click="showAll($event)" >Show all results</button> 
+
+    <ul>
+      <li ng-repeat="place in places | filter:orderProp" ng-init="liVisible" ng-hide="liVisible == false">
+        <p class="name" ng-click="select(place)">{{place.name}}</p>
+
+      </li>
+    </ul>
+  </div>
+  <div class="google-map" 
+    center="centerProperty"
+    zoom="zoomProperty" 
+    markers="filteredMarkersProperty"
+    latitude="clickedLatitudeProperty"
+    longitude="clickedLongitudeProperty"
+    mark-click="false"
+    draggable="true"
+    style="height: 500px; width: 80%; float:right">
+  </div>
+    
+
+
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.js"></script>
+<script src="lib/google-maps.js"></script>
+<script src="js/map.js"></script>
+
+<script>
+
+</script>
+
+
+</body>
+</html>
+
+<!--
+Functions:
+  - Will work for any JSON data that has "latitude", "longitude" and "name"
+  - Can be altered to work with just about any JSON data
+  - Takes "category" from JSON, strips out duplicates, allows selection of items in those categories and only shows those markers
+  - Will dynamically zoom and go-to the marker (or group of markers) on the map
+  - Clicking on one name will focus just on that marker
+
+
+
+
+
+
+
+
+-->
